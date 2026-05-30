@@ -435,7 +435,7 @@ export default function FixturesPage() {
 
     const socketUrl = window.location.hostname === 'localhost'
       ? 'http://localhost:5001'
-      : `${window.location.protocol}//${window.location.hostname}:5001`;
+      : '';
 
     const s = io(socketUrl);
 

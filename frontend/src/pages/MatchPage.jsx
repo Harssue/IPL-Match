@@ -372,7 +372,7 @@ export default function MatchPage() {
     // 2. Open socket connection dynamically based on location hostname for LAN tests
     const socketUrl = window.location.hostname === 'localhost' 
       ? 'http://localhost:5001' 
-      : `${window.location.protocol}//${window.location.hostname}:5001`;
+      : '';
 
     const s = io(socketUrl);
     setSocket(s);
