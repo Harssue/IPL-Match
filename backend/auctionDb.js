@@ -4,12 +4,15 @@
  */
 const { Sequelize, DataTypes } = require('sequelize');
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
-const AUCTION_DB = path.resolve(
-  __dirname,
-  process.env.AUCTION_DB_PATH || '../../IPL/backend/ipl_auction.sqlite3'
-);
+const localPath = path.resolve(__dirname, './ipl_auction.sqlite3');
+const fallbackPath = path.resolve(__dirname, '../../IPL/backend/ipl_auction.sqlite3');
+
+const AUCTION_DB = process.env.AUCTION_DB_PATH
+  ? path.resolve(__dirname, process.env.AUCTION_DB_PATH)
+  : (fs.existsSync(localPath) ? localPath : fallbackPath);
 
 const auctionSeq = new Sequelize({
   dialect: 'sqlite',
