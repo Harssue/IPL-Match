@@ -34,6 +34,14 @@ app.get('/api/health', (_req, res) =>
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 );
 
+// ── Serve React Frontend (Production) ─────────────────────────────
+const path = require('path');
+const frontendDistPath = path.join(__dirname, '../frontend/dist');
+app.use(express.static(frontendDistPath));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendDistPath, 'index.html'));
+});
+
 // ── Startup ───────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 5001;
 
